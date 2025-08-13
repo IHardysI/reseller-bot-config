@@ -1,0 +1,14 @@
+{
+	"name": "bot-bun",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "bun run --hot src/index.ts",
+		"start": "bun run src/index.ts"
+	},
+	"devDependencies": {
+		"@types/bun": "^1.1.6",
+		"@types/node": "^22.5.0"
+	}
+}
+
