@@ -1,6 +1,7 @@
 const BOT_TOKEN = process.env.BOT_TOKEN
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL
 const WEBHOOK_SECRET = process.env.TELEGRAM_WEBHOOK_SECRET
+const PORT = Number(process.env.PORT || 3001)
 
 if (!BOT_TOKEN) {
 	console.error('BOT_TOKEN is required')
@@ -66,4 +67,14 @@ async function startPolling() {
 	startPolling()
 })()
 console.log('Bot polling started')
+
+const server = Bun.serve({
+	port: PORT,
+	fetch(req) {
+		const { pathname } = new URL(req.url)
+		if (pathname === '/healthz') return new Response('ok')
+		return new Response('ok')
+	},
+})
+console.log(`HTTP server listening on ${server.port}`)
 
